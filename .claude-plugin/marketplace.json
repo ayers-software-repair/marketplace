@@ -1,0 +1,23 @@
+{
+  "name": "ayersrepair",
+  "owner": {
+    "name": "Ayers Electronics"
+  },
+  "metadata": {
+    "description": "Plugins for Claude Code from Ayers Electronics."
+  },
+  "plugins": [
+    {
+      "name": "tldr",
+      "source": "./plugins/tldr",
+      "description": "A TL;DR band above the prompt that lists what the agent is waiting on you for, plus /cards, a pane of card games to play while it works.",
+      "category": "productivity",
+      "tags": [
+        "tldr",
+        "summary",
+        "games",
+        "mod"
+      ]
+    }
+  ]
+}

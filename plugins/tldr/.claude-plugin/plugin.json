@@ -1,0 +1,11 @@
+{
+  "name": "tldr",
+  "version": "0.1.0",
+  "description": "A TL;DR band above the prompt that tracks what the agent is waiting on you for, plus /cards, a pane of card games to play while it works.",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "Zachariah Ayers"
+  },
+  "license": "Apache-2.0",
+  "repository": "https://github.com/ayers-software-repair/marketplace"
+}
