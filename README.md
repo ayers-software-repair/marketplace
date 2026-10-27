@@ -1,7 +1,7 @@
-# Ayers plugins for Claude Code
+# Ayers plugins for AI agents
 
-This is a plugin marketplace from Ayers Electronics.
-Today it holds two plugins: `tldr` and `letterstream-mail`.
+This is a plugin marketplace from Ayers Electronics, with plugins and MCP servers for AI agents.
+Today it holds three: `tldr`, `letterstream-mail` and `lancelot`.
 
 ## The tldr plugin
 
@@ -27,6 +27,15 @@ YOU: pick a name for the new table
 
 After you install it, ask Claude to mail a letter.
 
+## The lancelot plugin
+
+- **What it does.** An MCP server that answers search and retrieval queries against a local LanceDB database. It uses OpenAI embeddings when `OPENAI_API_KEY` is set and text search otherwise.
+- **Tools.** `lancedb_search`, `lancedb_query`, `lancedb_status` and `lancedb_version`.
+- **Setup.** Claude Code asks for your database folder and, optionally, an OpenAI API key when you install it.
+- **Where it runs.** Runs in any MCP client; the plugin form targets Claude Code, the direct form works anywhere `npx` runs.
+
+See [plugins/lancelot/README.md](plugins/lancelot/README.md) for the tools, settings and the direct form.
+
 ## Install
 
 In Claude Code, add the marketplace, then install the plugin you want:
@@ -35,6 +44,7 @@ In Claude Code, add the marketplace, then install the plugin you want:
 /plugin marketplace add ayers-software-repair/marketplace
 /plugin install tldr@ayersrepair
 /plugin install letterstream-mail@ayersrepair
+/plugin install lancelot@ayersrepair
 ```
 
 Or from a shell:
@@ -43,6 +53,7 @@ Or from a shell:
 claude plugin marketplace add ayers-software-repair/marketplace
 claude plugin install tldr@ayersrepair --scope user
 claude plugin install letterstream-mail@ayersrepair --scope user
+claude plugin install lancelot@ayersrepair --scope user
 ```
 
 For tldr:

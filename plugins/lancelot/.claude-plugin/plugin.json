@@ -1,0 +1,25 @@
+{
+  "name": "lancelot",
+  "version": "0.2.0",
+  "description": "Answers search and retrieval queries against a local LanceDB database, using OpenAI embeddings when an API key is set and text search otherwise.",
+  "author": {
+    "name": "Zachariah Ayers"
+  },
+  "license": "Apache-2.0",
+  "repository": "https://github.com/ayers-software-repair/lancelot",
+  "userConfig": {
+    "lancedb_path": {
+      "type": "directory",
+      "title": "LanceDB database folder",
+      "description": "Folder that holds your LanceDB database. Lancelot reads it and never writes to it.",
+      "required": true
+    },
+    "openai_api_key": {
+      "type": "string",
+      "title": "OpenAI API key",
+      "description": "Embeddings use this key when it is present. Text search runs when it is empty.",
+      "sensitive": true,
+      "required": false
+    }
+  }
+}

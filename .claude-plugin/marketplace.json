@@ -4,7 +4,7 @@
     "name": "Ayers Electronics"
   },
   "metadata": {
-    "description": "Plugins for Claude Code from Ayers Electronics."
+    "description": "Plugins and MCP servers for AI agents from Ayers Electronics."
   },
   "plugins": [
     {
@@ -28,6 +28,18 @@
         "mail",
         "letters",
         "certified-mail"
+      ]
+    },
+    {
+      "name": "lancelot",
+      "source": "./plugins/lancelot",
+      "description": "Answers search and retrieval queries against a local LanceDB database, using OpenAI embeddings when an API key is set and text search otherwise.",
+      "category": "productivity",
+      "tags": [
+        "mcp",
+        "lancedb",
+        "search",
+        "rag"
       ]
     }
   ]
