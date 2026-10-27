@@ -61,6 +61,33 @@ For tldr:
 - For the band, type nothing. It appears after the next reply.
 - For the games, type `/cards`. Type it again to close the pane.
 
+## Other agents
+
+The same plugins are published in the Agent Plugins open format (`plugin.json` and `mcp.json` in each plugin folder, generated from the Claude manifests by `scripts/agent-plugins.mjs`).
+
+- **Copilot CLI.**
+
+  ```
+  copilot plugin marketplace add ayers-software-repair/marketplace
+  copilot plugin install <name>@ayersrepair
+  ```
+
+- **VS Code.** Add the marketplace to `chat.plugins.marketplaces` in `settings.json`:
+
+  ```
+  "chat.plugins.marketplaces": ["ayers-software-repair/marketplace"]
+  ```
+
+- **Cursor.** Cursor reads a plugin folder that has a root `plugin.json`. It is not listed in the Cursor Marketplace yet.
+
+Where each plugin runs today:
+
+| Plugin | Runs in |
+|---|---|
+| `tldr` | Claude Code only (hook modules) |
+| `letterstream-mail` | Claude Code (needs the Claude in Chrome extension) |
+| `lancelot` | Any MCP client. Outside Claude Code, set `LANCEDB_PATH` and optionally `OPENAI_API_KEY` in your client's settings for the server, as the Agent Plugins format has no install-time prompt. |
+
 ## Update and remove
 
 Update:
@@ -120,6 +147,12 @@ plugins/tldr/                     the plugin
   .claude-plugin/plugin.json
   hooks/                          the hook modules
   types/
+```
+
+Regenerate the Agent Plugins files after you change a Claude manifest:
+
+```
+node scripts/agent-plugins.mjs
 ```
 
 Check the plugin before you push:
