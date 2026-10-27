@@ -1,7 +1,7 @@
 # Ayers plugins for Claude Code
 
 This is a plugin marketplace from Ayers Electronics.
-Today it holds one plugin, `tldr`.
+Today it holds two plugins: `tldr` and `letterstream-mail`.
 
 ## What you get
 
@@ -17,6 +17,21 @@ TL;DR
 • Tests pass except one flaky timeout.
 YOU: pick a name for the new table
 ```
+
+## The letterstream-mail plugin
+
+- **What it does.** It mails a paper letter for you through LetterStream, as Certified Mail with an electronic return receipt. You need no printer, stamps or post office trip.
+- **How it works.** Claude drafts the letter, builds the PDF, and fills the LetterStream job in your Chrome with Claude in Chrome.
+- **You stay in control.** You create the account and add payment. You approve the letter text, read the proof, tick the acknowledgment and pay. Claude never enters credentials or presses the final button.
+- **Cost.** A one-page certified letter with the return receipt cost $11.64 in our first run. LetterStream shows the exact total before you pay.
+
+Install:
+
+```
+/plugin install letterstream-mail@ayersrepair
+```
+
+Then ask Claude to mail a letter.
 
 ## Install
 
@@ -53,7 +68,7 @@ Remove:
 claude plugin uninstall tldr@ayersrepair
 ```
 
-There is no version number. Every new commit here is an update.
+Each plugin carries a version in its `plugin.json`. Update to get the latest.
 
 ## What it needs
 

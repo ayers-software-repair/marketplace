@@ -1,0 +1,11 @@
+{
+  "name": "letterstream-mail",
+  "version": "0.1.0",
+  "description": "A skill that mails a letter for you through LetterStream, with Certified Mail and a return receipt, using Claude in Chrome. It stops for your approval of the letter and the final price.",
+  "icon": "./.claude-plugin/icon.png",
+  "author": {
+    "name": "Zachariah Ayers"
+  },
+  "license": "Apache-2.0",
+  "repository": "https://github.com/ayers-software-repair/marketplace"
+}

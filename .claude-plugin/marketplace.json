@@ -18,6 +18,17 @@
         "games",
         "mod"
       ]
+    },
+    {
+      "name": "letterstream-mail",
+      "source": "./plugins/letterstream-mail",
+      "description": "Mail a letter by Certified Mail through LetterStream from Claude Code, with approval gates for the letter and the total.",
+      "category": "productivity",
+      "tags": [
+        "mail",
+        "letters",
+        "certified-mail"
+      ]
     }
   ]
 }

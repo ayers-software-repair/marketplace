@@ -7,7 +7,7 @@ Thank you for helping.
 3. Run the tests: `claude plugin test plugins/tldr`
 4. Both must pass before you open a pull request.
 5. Keep one change per pull request.
-6. Do not add a `version` field. Updates follow the latest commit.
+6. Give each plugin a `version` in its `plugin.json`, and raise it when the plugin changes.
 7. No emoji, and no copyright year in any copyright line.
 8. Write short comments in plain words.
 9. By sending a pull request you agree your work is licensed under Apache-2.0,
