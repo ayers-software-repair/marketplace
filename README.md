@@ -3,7 +3,7 @@
 This is a plugin marketplace from Ayers Electronics.
 Today it holds two plugins: `tldr` and `letterstream-mail`.
 
-## What you get
+## The tldr plugin
 
 - **The band.** A short TL;DR of the assistant's last replies, shown above your prompt.
 - **The waiting-on-you list.** Anything the agent is waiting on you for is shown first, in bold, until you answer it.
@@ -25,21 +25,16 @@ YOU: pick a name for the new table
 - **You stay in control.** You create the account and add payment. You approve the letter text, read the proof, tick the acknowledgment and pay. Claude never enters credentials or presses the final button.
 - **Cost.** A one-page certified letter with the return receipt cost $11.64 in our first run. LetterStream shows the exact total before you pay.
 
-Install:
-
-```
-/plugin install letterstream-mail@ayersrepair
-```
-
-Then ask Claude to mail a letter.
+After you install it, ask Claude to mail a letter.
 
 ## Install
 
-In Claude Code, type these two lines:
+In Claude Code, add the marketplace, then install the plugin you want:
 
 ```
 /plugin marketplace add ayers-software-repair/marketplace
 /plugin install tldr@ayersrepair
+/plugin install letterstream-mail@ayersrepair
 ```
 
 Or from a shell:
@@ -47,9 +42,10 @@ Or from a shell:
 ```
 claude plugin marketplace add ayers-software-repair/marketplace
 claude plugin install tldr@ayersrepair --scope user
+claude plugin install letterstream-mail@ayersrepair --scope user
 ```
 
-Then:
+For tldr:
 
 - For the band, type nothing. It appears after the next reply.
 - For the games, type `/cards`. Type it again to close the pane.
@@ -59,24 +55,29 @@ Then:
 Update:
 
 ```
-claude plugin update tldr@ayersrepair
+claude plugin update <plugin>@ayersrepair
 ```
 
 Remove:
 
 ```
-claude plugin uninstall tldr@ayersrepair
+claude plugin uninstall <plugin>@ayersrepair
 ```
 
 Each plugin carries a version in its `plugin.json`. Update to get the latest.
 
 ## What it needs
 
-Claude Code with plugin hook modules.
+`tldr` needs Claude Code with plugin hook modules.
+`letterstream-mail` needs the Claude in Chrome extension and a LetterStream account.
 It was built on Claude Code 2.1.291.
 Older versions are untested.
 
 ## Privacy
+
+`letterstream-mail` sends nothing anywhere itself. Your letter goes to LetterStream through your own browser session, and you enter your own sign-in and payment. It has no telemetry.
+
+For `tldr`:
 
 - After each reply, the band asks Claude to summarise the last few replies.
 - That request goes through your own Claude Code session and your own model setup.
