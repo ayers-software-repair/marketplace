@@ -65,6 +65,10 @@ Add this to the client's MCP server configuration:
 
 Leave `OPENAI_API_KEY` out for text search only.
 
+## Privacy
+
+When `OPENAI_API_KEY` is set, query text is sent to OpenAI to compute embeddings. Without a key nothing leaves the machine. The database is only read.
+
 ## Standard output
 
 The server writes nothing but MCP messages to stdout. Logs go to stderr.
