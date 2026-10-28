@@ -13,6 +13,8 @@ It runs over stdio and needs Node 20 or newer.
 | `lancedb_status` | `verbose` | Reports the state of the database connection and its tables. |
 | `lancedb_version` | none | Reports the server version. |
 
+Lancelot also runs as a hosted read-only HTTPS endpoint at https://ayers.repair/mcp/lancelot over the Ayers public docs.
+
 ## Environment variables
 
 | Variable | Required | What it sets |
@@ -41,7 +43,7 @@ To change either later, run `/plugin configure lancelot@ayersrepair`.
 ## Use it without the plugin
 
 ```
-claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayersrepair/lancelot@0.2.0
+claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayersrepair/lancelot@0.3.0
 ```
 
 ## Other MCP clients
@@ -53,7 +55,7 @@ Add this to the client's MCP server configuration:
   "mcpServers": {
     "lancelot": {
       "command": "npx",
-      "args": ["-y", "@ayersrepair/lancelot@0.2.0"],
+      "args": ["-y", "@ayersrepair/lancelot@0.3.0"],
       "env": {
         "LANCEDB_PATH": "/path/to/db",
         "OPENAI_API_KEY": "..."
