@@ -86,4 +86,4 @@ Published by Ayers Electronics.
 
 ## Listing icon
 
-`.claude-plugin/icon.png` is rendered at 1024 px with the sealed browser from `art/lancelot-icon.svg`, which `node art/lancelot-icon.mjs` at the repository root computes (Lancelot's great helm in the LanceDB mark's colours; computed art, no editor). Edit the generator and re-run it, then re-render; never hand-edit the SVG or the PNG. The directory fixes the icon at first submission.
+`.claude-plugin/icon.png` is rendered at 1024 px with the sealed browser from `art/lancelot-icon.svg`, which `node art/lancelot-icon.mjs` at the repository root computes: the Lancelot wordmark in Pacifico (SIL Open Font License 1.1, `art/fonts/`), red with a cream outline, on the LanceDB mark's field. Edit the generator and re-run it, then re-render with a browser that has the font; never hand-edit the SVG or the PNG. The directory fixes the icon at first submission.
