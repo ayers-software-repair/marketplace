@@ -7,6 +7,7 @@
   },
   "license": "Apache-2.0",
   "repository": "https://github.com/ayers-software-repair/lancelot",
+  "privacyPolicyUrl": "https://ayers.repair/legal/lancelot/privacy.html",
   "userConfig": {
     "lancedb_path": {
       "type": "directory",

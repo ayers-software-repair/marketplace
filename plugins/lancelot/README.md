@@ -13,7 +13,7 @@ It runs over stdio and needs Node 20 or newer.
 | `lancedb_status` | `verbose` | Reports the state of the database connection and its tables. |
 | `lancedb_version` | none | Reports the server version. |
 
-Lancelot also runs as a hosted read-only HTTPS endpoint at https://ayers.repair/mcp/lancelot over the Ayers public docs.
+Lancelot also runs as a hosted read-only HTTPS endpoint at https://mcp.ayers.repair/lancelot over the Ayers public docs.
 
 ## Environment variables
 
@@ -70,6 +70,8 @@ Leave `OPENAI_API_KEY` out for text search only.
 ## Privacy
 
 When `OPENAI_API_KEY` is set, query text is sent to OpenAI to compute embeddings. Without a key nothing leaves the machine. The database is only read.
+
+[Privacy policy](https://ayers.repair/legal/lancelot/privacy.html) and [terms](https://ayers.repair/legal/lancelot/terms.html): the full statement, including what the hosted endpoint receives.
 
 ## Standard output
 
