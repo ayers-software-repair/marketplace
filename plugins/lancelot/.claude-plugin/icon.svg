@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Lancelot listing icon, computed: three offset index cards with text lines, the marketplace's index prop. -->
+  <rect width="1024" height="1024" rx="200" fill="#0f5c45"/>
+  <g transform="translate(512 540)">
+    <g transform="rotate(-9) translate(-250 -170)">
+      <rect width="500" height="340" rx="36" fill="#d9e8dd"/>
+    </g>
+    <g transform="rotate(-3) translate(-250 -170)">
+      <rect width="500" height="340" rx="36" fill="#eef3ee"/>
+    </g>
+    <g transform="rotate(4) translate(-250 -170)">
+      <rect width="500" height="340" rx="36" fill="#fbf8f2"/>
+      <rect x="56" y="70" width="300" height="26" rx="13" fill="#0f5c45" opacity="0.9"/>
+      <rect x="56" y="134" width="388" height="22" rx="11" fill="#a7bfae"/>
+      <rect x="56" y="190" width="340" height="22" rx="11" fill="#a7bfae"/>
+      <rect x="56" y="246" width="260" height="22" rx="11" fill="#a7bfae"/>
+      <circle cx="400" cy="256" r="44" fill="none" stroke="#c56f4b" stroke-width="22"/>
+      <line x1="432" y1="288" x2="470" y2="326" stroke="#c56f4b" stroke-width="22" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
