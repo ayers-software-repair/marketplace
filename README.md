@@ -42,18 +42,18 @@ In Claude Code, add the marketplace, then install the plugin you want:
 
 ```
 /plugin marketplace add ayers-software-repair/marketplace
-/plugin install tldr@ayersrepair
-/plugin install letterstream-mail@ayersrepair
-/plugin install lancelot@ayersrepair
+/plugin install tldr@ayerselectronics
+/plugin install letterstream-mail@ayerselectronics
+/plugin install lancelot@ayerselectronics
 ```
 
 Or from a shell:
 
 ```
 claude plugin marketplace add ayers-software-repair/marketplace
-claude plugin install tldr@ayersrepair --scope user
-claude plugin install letterstream-mail@ayersrepair --scope user
-claude plugin install lancelot@ayersrepair --scope user
+claude plugin install tldr@ayerselectronics --scope user
+claude plugin install letterstream-mail@ayerselectronics --scope user
+claude plugin install lancelot@ayerselectronics --scope user
 ```
 
 For tldr:
@@ -69,7 +69,7 @@ The same plugins are published in the Agent Plugins open format (`plugin.json` a
 
   ```
   copilot plugin marketplace add ayers-software-repair/marketplace
-  copilot plugin install <name>@ayersrepair
+  copilot plugin install <name>@ayerselectronics
   ```
 
 - **VS Code.** Add the marketplace to `chat.plugins.marketplaces` in `settings.json`:
@@ -93,13 +93,13 @@ Where each plugin runs today:
 Update:
 
 ```
-claude plugin update <plugin>@ayersrepair
+claude plugin update <plugin>@ayerselectronics
 ```
 
 Remove:
 
 ```
-claude plugin uninstall <plugin>@ayersrepair
+claude plugin uninstall <plugin>@ayerselectronics
 ```
 
 Each plugin carries a version in its `plugin.json`. Update to get the latest.

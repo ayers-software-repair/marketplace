@@ -33,17 +33,17 @@ Lancelot also runs as a hosted read-only HTTPS endpoint at https://mcp.ayers.rep
 
 ```
 /plugin marketplace add ayers-software-repair/marketplace
-/plugin install lancelot@ayersrepair
+/plugin install lancelot@ayerselectronics
 ```
 
 Claude Code asks for the database folder and, optionally, an OpenAI API key.
 The key is stored in your system's secure credential store.
-To change either later, run `/plugin configure lancelot@ayersrepair`.
+To change either later, run `/plugin configure lancelot@ayerselectronics`.
 
 ## Use it without the plugin
 
 ```
-claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayerselectronics/lancelot@0.3.1
+claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayerselectronics/lancelot@latest
 ```
 
 ## Other MCP clients
@@ -55,7 +55,7 @@ Add this to the client's MCP server configuration:
   "mcpServers": {
     "lancelot": {
       "command": "npx",
-      "args": ["-y", "@ayerselectronics/lancelot@0.3.1"],
+      "args": ["-y", "@ayerselectronics/lancelot@latest"],
       "env": {
         "LANCEDB_PATH": "/path/to/db",
         "OPENAI_API_KEY": "..."
