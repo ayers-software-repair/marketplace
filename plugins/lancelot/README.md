@@ -43,7 +43,7 @@ To change either later, run `/plugin configure lancelot@ayersrepair`.
 ## Use it without the plugin
 
 ```
-claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayersrepair/lancelot@0.3.0
+claude mcp add --env LANCEDB_PATH=/path/to/db --env OPENAI_API_KEY=... --transport stdio lancelot -- npx -y @ayerselectronics/lancelot@0.3.1
 ```
 
 ## Other MCP clients
@@ -55,7 +55,7 @@ Add this to the client's MCP server configuration:
   "mcpServers": {
     "lancelot": {
       "command": "npx",
-      "args": ["-y", "@ayersrepair/lancelot@0.3.0"],
+      "args": ["-y", "@ayerselectronics/lancelot@0.3.1"],
       "env": {
         "LANCEDB_PATH": "/path/to/db",
         "OPENAI_API_KEY": "..."

@@ -1,9 +1,9 @@
 {
   "name": "lancelot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Answers search and retrieval queries against a local LanceDB database, using OpenAI embeddings when an API key is set and text search otherwise.",
   "author": {
-    "name": "Zachariah Ayers"
+    "name": "Ayers Electronics"
   },
   "license": "Apache-2.0",
   "repository": "https://github.com/ayers-software-repair/lancelot",

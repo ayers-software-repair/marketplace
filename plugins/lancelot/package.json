@@ -3,6 +3,6 @@
   "private": true,
   "description": "Launcher lock for the Lancelot plugin: pins the npm package .mcp.json runs.",
   "dependencies": {
-    "@ayersrepair/lancelot": "0.3.0"
+    "@ayerselectronics/lancelot": "0.3.1"
   }
 }

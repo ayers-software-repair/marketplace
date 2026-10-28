@@ -6,7 +6,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "@ayersrepair/lancelot@0.3.0"
+        "@ayerselectronics/lancelot@0.3.1"
       ]
     }
   }

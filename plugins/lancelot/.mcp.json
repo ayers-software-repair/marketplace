@@ -2,7 +2,7 @@
   "mcpServers": {
     "lancelot": {
       "command": "npx",
-      "args": ["-y", "@ayersrepair/lancelot@0.3.0"],
+      "args": ["-y", "@ayerselectronics/lancelot@0.3.1"],
       "env": {
         "LANCEDB_PATH": "${user_config.lancedb_path}",
         "OPENAI_API_KEY": "${user_config.openai_api_key}"
