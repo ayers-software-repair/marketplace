@@ -86,4 +86,4 @@ Published by Ayers Electronics.
 
 ## Listing icon
 
-`.claude-plugin/icon.png` is rendered from `art/lancelot-icon.svg` at the repository root (computed art, no editor) at 1024 px with the sealed browser. Edit the SVG and re-render; never hand-edit the PNG. The directory fixes the icon at first submission.
+`.claude-plugin/icon.png` is rendered at 1024 px with the sealed browser from `art/lancelot-icon.svg`, which `node art/lancelot-icon.mjs` at the repository root computes (Lancelot's great helm in the LanceDB mark's colours; computed art, no editor). Edit the generator and re-run it, then re-render; never hand-edit the SVG or the PNG. The directory fixes the icon at first submission.
