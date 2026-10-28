@@ -81,3 +81,7 @@ A client reads stdout as protocol messages only, so anything else on it breaks t
 https://github.com/ayers-software-repair/lancelot
 
 Published by Ayers Electronics.
+
+## Listing icon
+
+`.claude-plugin/icon.png` is rendered from `.claude-plugin/icon.svg` (computed art, no editor) at 1024 px with the sealed browser. Edit the SVG and re-render; never hand-edit the PNG. The directory fixes the icon at first submission.
