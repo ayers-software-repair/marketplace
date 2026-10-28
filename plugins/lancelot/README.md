@@ -84,4 +84,4 @@ Published by Ayers Electronics.
 
 ## Listing icon
 
-`.claude-plugin/icon.png` is rendered from `.claude-plugin/icon.svg` (computed art, no editor) at 1024 px with the sealed browser. Edit the SVG and re-render; never hand-edit the PNG. The directory fixes the icon at first submission.
+`.claude-plugin/icon.png` is rendered from `art/lancelot-icon.svg` at the repository root (computed art, no editor) at 1024 px with the sealed browser. Edit the SVG and re-render; never hand-edit the PNG. The directory fixes the icon at first submission.
