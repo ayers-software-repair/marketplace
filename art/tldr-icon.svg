@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#202621"/>
+  <text x="256" y="282" text-anchor="middle" fill="#efb43d" font-family="DejaVu Sans Mono, monospace" font-size="112" font-weight="700">TL;DR</text>
+  <path d="M90 328h272" stroke="#efb43d" stroke-width="12"/>
+  <path d="M382 312h32v32h-32z" fill="#efb43d"/>
+</svg>
