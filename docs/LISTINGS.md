@@ -1,33 +1,57 @@
-# Listings
+# Listing and installation status
 
-Where each plugin is listed. Cell values: `listed <date>`, `submitted <date>`, `n/a (stdio)`, `n/a (hook plugin)`, or blank when not done.
+Publisher: **Ayers Electronics**. Marketplace identifier: **`ayerselectronics`**.
+GitHub source remains [`ayers-software-repair/marketplace`](https://github.com/ayers-software-repair/marketplace).
 
-| Network | tldr | letterstream-mail | lancelot |
-|---|---|---|---|
-| Official MCP Registry [1] | n/a (hook plugin) | n/a (skill plugin) | |
-| Glama [2] | n/a (hook plugin) | n/a (skill plugin) | |
-| GitHub MCP Registry [3] | n/a (hook plugin) | n/a (skill plugin) | |
-| Anthropic directory [4] | | | |
-| Claude connectors [5] | n/a (hook plugin) | n/a (skill plugin) | n/a (stdio) |
-| OpenAI directory [6] | n/a (hook plugin) | n/a (skill plugin) | |
-| Smithery [7] | n/a (hook plugin) | n/a (skill plugin) | |
-| VS Code link [8] | n/a (hook plugin) | n/a (skill plugin) | |
-| Cursor link [9] | n/a (hook plugin) | n/a (skill plugin) | |
-| awesome-mcp-servers [10] | n/a (hook plugin) | n/a (skill plugin) | |
-| mcp.so [11] | n/a (hook plugin) | n/a (skill plugin) | |
-| awesome-copilot [12] | | | |
-| Cursor Marketplace [13] | | | |
+The owner completes account-creation and final directory submissions. Source preparation and
+validation can proceed independently. A working install link, submission or generated manifest
+is not proof of directory acceptance.
 
-1. Official MCP Registry: publish server.json with the mcp-publisher CLI.
-2. Glama: add the server through glama.ai's submit form.
-3. GitHub MCP Registry: reached through the official MCP Registry entry.
-4. Anthropic directory: submit the plugin through Anthropic's directory form.
-5. Claude connectors: remote servers only, so a stdio server does not fit.
-6. OpenAI directory: submit through OpenAI's app and connector submission flow.
-7. Smithery: publish from the repository through the Smithery dashboard.
-8. VS Code link: a vscode:mcp/install link placed in the README.
-9. Cursor link: a Cursor MCP install deeplink placed in the README.
-10. awesome-mcp-servers: open a pull request adding one list line.
-11. mcp.so: submit the server through the mcp.so submit page.
-12. awesome-copilot: external-plugin issue form, then maintainer approval and `vally lint`.
-13. Cursor Marketplace: submit at cursor.com/marketplace/publish; manual review, open source only.
+## Verified distribution — 29 October 2026
+
+| Surface | Evidence | What remains |
+| --- | --- | --- |
+| Claude Code marketplace | Main 8098de0 names `ayerselectronics`; root README contains all three install commands. | Fresh host compatibility checks are separate from manifest validation. |
+| npm | [`@ayerselectronics/lancelot`](https://www.npmjs.com/package/@ayerselectronics/lancelot) resolves to 0.3.1. | Local dependency repairs require their own checked release. |
+| Official MCP Registry | [Registry query](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.ayers-software-repair/lancelot) contains exact identity `io.github.ayers-software-repair/lancelot`, version 0.3.1, npm package `@ayerselectronics/lancelot`. | Published 0.3.1 has no `remotes`. Publish and read back the hosted metadata through the release flow. |
+| Hosted MCP | `https://mcp.ayers.repair/lancelot` answered initialization with server version 0.3.1 on 29 October. | Connector review and directory acceptance are separate. |
+| Old npm scope | `@ayersrepair/lancelot` still resolves to 0.3.0. | Owner-authorized removal is not complete; authentication alone did not remove it. |
+
+## Directory queue
+
+No submission ID or independently verified public listing is recorded below. Do not mark these
+as submitted or listed until the corresponding evidence exists.
+
+| Destination | Applicable artifact | Next step |
+| --- | --- | --- |
+| [Anthropic directory](https://claude.com/docs/directory/publish) | Plugin bundles: TLDR, LetterStream Mail, Lancelot. Separate MCP connector: hosted Lancelot. | Validate each bundle against its actual host capabilities; prepare the connector against the live HTTPS endpoint. Owner submits each entry. |
+| [OpenAI plugins](https://developers.openai.com/plugins/deploy/submission) | Skills and MCP packages supported by the target host. | Prepare a compatible package and test cases. LetterStream's browser dependency and TLDR's Claude-specific hooks need adaptation and proof; generated manifests alone do not establish support. |
+| [Cursor Marketplace](https://cursor.com/docs/plugins) | Supported plugin components. | Test the intended components in Cursor before preparing the owner submission. |
+| [Glama](https://glama.ai/mcp/servers) | Lancelot MCP. | Confirm ingestion, ownership and the public entry; neither an account nor `glama.json` proves listing. |
+| [GitHub MCP Registry](https://github.com/mcp) | Lancelot MCP. | Verify discoverability independently of the official registry entry. |
+| [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Lancelot MCP. | Prepare an eligible entry, then record the submitted PR and maintainer result separately. |
+| [awesome-copilot](https://github.com/github/awesome-copilot) | Only components verified in the relevant Copilot host. | Read current contribution rules and test compatibility before preparing a submission. |
+
+Smithery and mcp.so are excluded by the owner. PulseMCP is not an active submission task; check
+its current acceptance policy before proposing it.
+
+## Compatibility evidence
+
+- TLDR uses Claude Code hook modules and terminal UI. A portable manifest does not port that UI.
+- LetterStream Mail's current workflow requires Claude in Chrome. Never remove document, price
+  or final-send approval to make another host appear supported.
+- Lancelot has local stdio and hosted Streamable HTTP forms. Test the exact client, transport
+  and configuration; a server initialization alone does not prove a complete host workflow.
+- VS Code and Cursor installation links are distribution aids, not marketplace listings. The
+  Lancelot repository README owns those links.
+
+## Recording a submission
+
+For each destination, record the artifact commit/version, tested host, prepared package hash,
+submission date/ID, review result, public URL and last verification date. Use explicit states:
+**preparation**, **ready for owner**, **submitted**, **changes requested**, **listed**, or
+**ineligible with a documented reason**. Keep credentials, personal account data and draft
+reviewer correspondence out of this public repository.
+
+The company release runbook in `ayers.repair/docs/RUNBOOK-mcp-release.md` owns publication order,
+trusted-publisher setup and recovery. This file owns listing evidence.
