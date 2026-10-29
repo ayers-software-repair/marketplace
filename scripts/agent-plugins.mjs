@@ -12,7 +12,7 @@ const SCHEMA = "https://agent-plugins.org/schemas/1.0.0/";
 // The spec's plugin.json is a closed schema, so the host goes in the description.
 const HOST = {
   tldr: "Runs in Claude Code only; it uses Claude Code hook modules.",
-  "letterstream-mail": "Needs the Claude in Chrome extension, so it runs in Claude Code today.",
+  "letterstream-mail": "Needs the Claude in Chrome extension, so it runs in Claude Code.",
   lancelot: "Runs in any MCP client over stdio.",
 };
 const readJson = (p) => JSON.parse(readFileSync(p, "utf8"));

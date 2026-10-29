@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "letterstream-mail",
   "version": "0.1.0",
-  "description": "A skill that mails a letter for you through LetterStream, with Certified Mail and a return receipt, using Claude in Chrome. It stops for your approval of the letter and the final price. Needs the Claude in Chrome extension, so it runs in Claude Code today.",
+  "description": "A skill that mails a letter for you through LetterStream, with Certified Mail and a return receipt, using Claude in Chrome. It stops for your approval of the letter and the final price. Needs the Claude in Chrome extension, so it runs in Claude Code.",
   "author": {
     "name": "Zachariah Ayers"
   },

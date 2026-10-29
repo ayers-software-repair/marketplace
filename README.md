@@ -1,7 +1,7 @@
 # Ayers plugins for AI agents
 
 This is a plugin marketplace from Ayers Electronics, with plugins and MCP servers for AI agents.
-Today it holds three: `tldr`, `letterstream-mail` and `lancelot`.
+Browse the plugins below for supported agents, installation, and requirements.
 
 ## The tldr plugin
 
@@ -78,9 +78,9 @@ The same plugins are published in the Agent Plugins open format (`plugin.json` a
   "chat.plugins.marketplaces": ["ayers-software-repair/marketplace"]
   ```
 
-- **Cursor.** Cursor reads a plugin folder that has a root `plugin.json`. It is not listed in the Cursor Marketplace yet.
+- **Cursor.** Cursor reads a plugin folder that has a root `plugin.json`. Use the supported-host requirements below when choosing a plugin.
 
-Where each plugin runs today:
+Supported hosts:
 
 | Plugin | Runs in |
 |---|---|

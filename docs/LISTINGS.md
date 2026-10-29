@@ -17,6 +17,23 @@ is not proof of directory acceptance.
 | Hosted MCP | `https://mcp.ayers.repair/lancelot` answered initialization with server version 0.3.1 on 29 October. | Connector review and directory acceptance are separate. |
 | Old npm scope | `@ayersrepair/lancelot` still resolves to 0.3.0. | Owner-authorized removal is not complete; authentication alone did not remove it. |
 
+## Bundle checks — 29 October 2026
+
+The installed Claude Code CLI accepted all three bundles with
+`claude plugin validate plugins/<name> --strict --profile directory --json`.
+Lancelot's existing bundle passed unchanged. LetterStream Mail now has its own README with
+installation, browser requirements, document review and final-payment boundaries. TLDR now
+includes a square 512-pixel PNG and installation instructions that name its Claude Code hook
+requirement.
+
+These checks do not execute hook modules, exercise a browser mailing job, establish other-host
+compatibility, or constitute directory acceptance. TLDR's executable hook modules still require
+the directory's separate review. No submission was made.
+
+TLDR's vector source is `art/tldr-icon.svg`. Reproduce its raster with
+`rsvg-convert --width 512 --height 512 art/tldr-icon.svg --output plugins/tldr/.claude-plugin/icon.png`
+(librsvg 2.58.0; DejaVu Sans Mono installed). The icon uses the existing graphite/amber terminal palette.
+
 ## Directory queue
 
 No submission ID or independently verified public listing is recorded below. Do not mark these

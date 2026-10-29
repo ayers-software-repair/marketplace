@@ -1,8 +1,19 @@
-# tldr
+# TL;DR
 
 A band above the Claude Code prompt with a running TL;DR of the assistant's last replies.
 Whatever is waiting on you comes first, in bold, until you answer it.
 It also adds `/cards`, a pane of card games to play while the agent works.
+
+## Install
+
+In Claude Code:
+
+```text
+/plugin install tldr --marketplace ayers-software-repair/marketplace
+```
+
+For an already-added marketplace, use `/plugin install tldr@ayerselectronics`.
+Requires Claude Code's plugin hook modules. The band and card pane use that host interface.
 
 ## The band
 
