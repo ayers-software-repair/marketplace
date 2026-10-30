@@ -32,7 +32,7 @@ After you install it, ask Claude to mail a letter.
 - **What it does.** An MCP server that answers search and retrieval queries against a local LanceDB database. It uses OpenAI embeddings when `OPENAI_API_KEY` is set and text search otherwise.
 - **Tools.** `lancedb_search`, `lancedb_query`, `lancedb_status` and `lancedb_version`.
 - **Setup.** Claude Code asks for your database folder and, optionally, an OpenAI API key when you install it.
-- **Where it runs.** Runs in any MCP client; the plugin form targets Claude Code, the direct form works anywhere `npx` runs.
+- **Where it runs.** Requires a client that supports MCP over stdio and can launch `npx` with `LANCEDB_PATH` set to an existing LanceDB database folder.
 
 See [plugins/lancelot/README.md](plugins/lancelot/README.md) for the tools, settings and the direct form.
 
@@ -86,7 +86,7 @@ Supported hosts:
 |---|---|
 | `tldr` | Claude Code only (hook modules) |
 | `letterstream-mail` | Claude Code (needs the Claude in Chrome extension) |
-| `lancelot` | Any MCP client. Outside Claude Code, set `LANCEDB_PATH` and optionally `OPENAI_API_KEY` in your client's settings for the server, as the Agent Plugins format has no install-time prompt. |
+| `lancelot` | MCP over stdio, with `npx` available to the client. In Claude Code, configure the database folder through the plugin prompt. In other clients, set `LANCEDB_PATH` to an existing LanceDB database folder in the server's environment; optionally set `OPENAI_API_KEY` for embeddings. |
 
 ## Update and remove
 

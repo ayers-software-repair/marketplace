@@ -62,6 +62,19 @@ its current acceptance policy before proposing it.
 - VS Code and Cursor installation links are distribution aids, not marketplace listings. The
   Lancelot repository README owns those links.
 
+Record each compatibility check with these fields. Installation and initialization results cover
+only those scenarios; a full workflow result must identify the steps actually exercised.
+
+| Field | Record |
+| --- | --- |
+| Bundle | Full source commit, plugin/package version and SHA-256 of the tested bundle. |
+| Host | Host and harness names/versions, plus surface (terminal, desktop or editor). |
+| OS | Operating system/version and architecture. |
+| Transport/configuration | MCP transport and endpoint or launch command, and configuration recipe with secrets omitted. For non-MCP components, record the required host integration. |
+| Scenario | Installation/discovery, initialization, or a named full workflow with its exercised steps. |
+| Result/evidence | Pass, fail or partial, limitations, and the evidence path or URL. |
+| UTC | Check timestamp in UTC. |
+
 ## Recording a submission
 
 For each destination, record the artifact commit/version, tested host, prepared package hash,
