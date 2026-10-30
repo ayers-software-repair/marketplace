@@ -42,13 +42,13 @@ export const registerBand: Register = on => {
           effort: 'low',
           maxTokens: 400,
           timeoutMs: 20000,
-        })
+        }).catch(() => null)
 
         if (mine !== newest) {
           return
         }
 
-        const shown = reply.isAnswered ? linesOf(reply.text) : fallbackLines(held, replies[replies.length - 1] ?? '')
+        const shown = reply?.isAnswered && reply.text.trim() !== '' ? linesOf(reply.text) : fallbackLines(held, replies[replies.length - 1] ?? '')
         await update($, lines, () => shown)
       })
     }

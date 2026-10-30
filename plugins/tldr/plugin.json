@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "tldr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A TL;DR band above the prompt that tracks what the agent is waiting on you for, plus /cards, a pane of card games to play while it works. Runs in Claude Code only; it uses Claude Code hook modules.",
   "author": {
     "name": "Zachariah Ayers"
