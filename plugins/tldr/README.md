@@ -74,8 +74,15 @@ Chips are pretend money. You start with 100; the initial bet is 5 and can be cha
 
 ## Update or remove
 
+From your shell, update the plugin, then restart Claude Code:
+
+```sh
+claude plugin update tldr@ayerselectronics
+```
+
+To remove it from inside a Claude Code session:
+
 ```text
-/plugin update tldr@ayerselectronics
 /plugin uninstall tldr@ayerselectronics
 ```
 
