@@ -40,7 +40,7 @@ jobs:
             cat /etc/os-release
             date -u +%FT%TZ
           } | tee tldr-evidence/host.txt
-          git archive HEAD:plugins/tldr | sha256sum | tee tldr-evidence/bundle.sha256
+          git -c tar.umask=0002 archive --format=tar --mtime=1970-01-01T00:00:00Z HEAD:plugins/tldr | sha256sum | tee tldr-evidence/bundle.sha256
           claude plugin install tldr --marketplace "$GITHUB_WORKSPACE" --scope user --json | tee tldr-evidence/install.json
           node --input-type=module <<'JS'
           import assert from 'node:assert/strict';

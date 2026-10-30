@@ -7,7 +7,7 @@ These are scenario results, not directory approval or proof of every host surfac
 | Field | Evidence |
 | --- | --- |
 | Source | `b8fc2daf8e95d0a35f5da2f8c01ebad6089bfde0`, TLDR `0.1.0` |
-| Bundle | `git archive b8fc2daf8e95d0a35f5da2f8c01ebad6089bfde0:plugins/tldr` SHA-256 `e963daf9b19d390f91356e212e6b5009299dcb76a1ed9db1920b65be550e3f5d` |
+| Bundle | Normalized source archive (command below), SHA-256 `3004dcf35babb0cb6b297f2702b67cdd415f46f2505b0c1890d493d6a8f37e5f` |
 | Host/harness | Native Claude Code CLI `2.1.312`, its built-in `claude plugin test` harness |
 | Host binary | SHA-256 `4f4178ce41d83e23341ebfbaecdbcf8ea6bf7baea0690025abe49eeec3a5d01d` |
 | OS | Ubuntu 24.04.5 LTS, Linux x86-64 |
@@ -44,9 +44,29 @@ Focused checks after the repair:
 - Strict directory-profile validation passes; generated manifests match the source manifest.
 
 These focused probes use the real Claude Code hook engine with stubbed model/clock/UI-host
-responses. They make no provider requests, start no Claude session and need no sign-in. The
-complete existing game/layout/mouse suite remains a separate hosted Linux check. Exact source
-and run results belong to the candidate PR's checks, not this local baseline result.
+responses. They make no provider requests, start no Claude session and need no sign-in.
+
+## Fresh installed-host suite — 30 October 2026
+
+[PR 4](https://github.com/ayers-software-repair/marketplace/pull/4) head
+`2a31beed7c151ee842e47d46a572ceec499ff4ce` passed the complete suite in
+[hosted run 41074499738](https://github.com/ayers-software-repair/marketplace/actions/runs/41074499738),
+job `124126951409`: **110 pass / 0 fail across 17 files**. GitHub tested merge checkout
+`4d6c25fcd199f759538f6808a1e15f01a701807d` on Ubuntu 24.04.5 x86-64 with freshly npm-installed
+Claude Code `2.1.312` and Node `22.23.4`, at `2026-10-30T14:46:04Z`.
+
+The job installed TLDR `0.1.1` into a fresh configuration, verified a single contained install
+path, compared every installed file with source, and passed all-plugin/generated-manifest
+checks plus installed TLDR's strict directory validation and offline tests. Coverage includes
+the summary lifecycle, command/pane behavior, game rules, terminal/Desktop mouse-client
+descriptions and layouts at multiple terminal sizes.
+
+[Evidence artifact 12985933671](https://github.com/ayers-software-repair/marketplace/actions/runs/41074499738/artifacts/12985933671)
+contains host identity, installation output, validation JSON and complete test output; ZIP
+SHA-256 `6ae7ca90fd851dfa35ac3192b42a65f292dea619051aa858b454f37f1a4307d8`.
+That first run's archive digest used variable timestamps. Its installed-file comparison and
+test results are valid; use the normalized archive command below for reproducible bundle hashes.
+The follow-up workflow fixes that command; its exact-source results are in the PR checks.
 
 ## Reproduce and review
 
@@ -65,8 +85,14 @@ claude plugin validate "$installPath" --strict --profile directory --json
 claude plugin test "$installPath"
 ```
 
-Record the source commit and `git archive HEAD:plugins/tldr | sha256sum` with each run. The
-test harness checks the host's hook engine and UI descriptions; it does not paint the native
+Record the source commit and a normalized source bundle hash with each run (replace `HEAD`
+with the baseline commit above to reproduce its hash):
+
+```sh
+git -c tar.umask=0002 archive --format=tar --mtime=1970-01-01T00:00:00Z HEAD:plugins/tldr | sha256sum
+```
+
+The test harness checks the host's hook engine and UI descriptions; it does not paint the native
 terminal, Desktop or editor UI. A full live workflow, real Haiku output, native fullscreen
 mouse behavior, other OSes/host versions and directory acceptance remain **unverified** here.
 Use the README's demo steps only with permission for the account's model usage. Other-agent
