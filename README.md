@@ -7,15 +7,24 @@ Browse the plugins below for supported agents, installation, and requirements.
 
 - **The band.** A short TL;DR of the assistant's last replies, shown above your prompt.
 - **The waiting-on-you list.** Anything the agent is waiting on you for is shown first, in bold, until you answer it.
-- **The cards.** Type `/cards` for Solitaire, Blackjack, Video Poker and Hi-Lo to play while the agent works. The same waiting items show on top.
+- **The cards.** Type `/cards` for ten games: Klondike Solitaire, FreeCell, Spider, Pyramid, Blackjack, Video Poker, Texas Hold'em, Baccarat, Hi-Lo and War. The waiting items and summary stay beneath the table while you play.
+
+TLDR requires Claude Code's mods (plugin hook modules), terminal UI and pane API. The tested
+host is Claude Code CLI **2.1.312 on Linux x86-64**, using its offline test harness. Native
+terminal/Desktop/editor rendering, live model summaries, other versions and OSes remain
+unverified. Installed mods must be allowed by your settings, organization policy and Anthropic's
+rollout. A generated manifest does not make these hooks work in another agent.
+
+See the [TLDR README](plugins/tldr/README.md) for installation and usage, and its
+[compatibility evidence](plugins/tldr/HOST-COMPATIBILITY.md) for exact checked scenarios.
 
 Text copy of the look (the real band uses your terminal's colours):
 
 ```
 TL;DR
+YOU: pick a name for the new table
 • Added the login page and wired it to the API.
 • Tests pass except one flaky timeout.
-YOU: pick a name for the new table
 ```
 
 ## The letterstream-mail plugin
@@ -58,7 +67,7 @@ claude plugin install lancelot@ayerselectronics --scope user
 
 For tldr:
 
-- For the band, type nothing. It appears after the next reply.
+- After installation and restart, the band appears after the next completed main assistant reply.
 - For the games, type `/cards`. Type it again to close the pane.
 
 ## Other agents
@@ -84,7 +93,7 @@ Host requirements:
 
 | Plugin | Requirements |
 |---|---|
-| `tldr` | Claude Code only (hook modules) |
+| `tldr` | Claude Code mods with terminal UI/panes; tested CLI 2.1.312 on Linux x86-64 through the offline harness. [Scope and limits](plugins/tldr/HOST-COMPATIBILITY.md). |
 | `letterstream-mail` | Claude Code (needs the Claude in Chrome extension) |
 | `lancelot` | MCP over stdio, with `npx` available to the client. In Claude Code, configure the database folder through the plugin prompt. In other clients, set `LANCEDB_PATH` to an existing LanceDB database folder in the server's environment; optionally set `OPENAI_API_KEY` for embeddings. |
 
@@ -106,7 +115,8 @@ Each plugin carries a version in its `plugin.json`. Update to get the latest.
 
 ## What it needs
 
-`tldr` needs Claude Code with plugin hook modules.
+`tldr` needs Claude Code with installed mods permitted; see its [tested host and limits](plugins/tldr/README.md#install).
+
 `letterstream-mail` needs the Claude in Chrome extension and a LetterStream account.
 It was built on Claude Code 2.1.291.
 Older versions are untested.
@@ -117,27 +127,33 @@ Older versions are untested.
 
 For `tldr`:
 
-- After each reply, the band asks Claude to summarise the last few replies.
-- That request goes through your own Claude Code session and your own model setup.
-- Nothing is sent anywhere else.
-- There is no telemetry.
-- The plugin does not read or write your files.
-- Card game state is kept in Claude Code's own plugin state.
+- After each completed, nonempty main assistant answer, TLDR schedules a separate **Haiku**
+  request through Claude Code's model API. It does not inherit the conversation's selected model.
+- The request sends up to three recent replies (each shortened to roughly 4,000 characters),
+  existing waiting items and up to 1,500 characters of your latest prompt through your configured
+  Claude Code provider. It requests at most 400 output tokens with a 20-second timeout.
+- This uses your Claude Code model access and may consume usage or incur charges under your
+  configuration. Disable TLDR to stop its background summary requests.
+- TLDR has no separate service, credentials or telemetry, and does not read or write project
+  files. Replies, waiting items and card state live in Claude Code's plugin state.
 
 ## The games
 
-Open `/cards`, then press a number to pick a game.
+Open `/cards`, then use the menu buttons or keys 1–9, then 0 to pick a game.
+Use each game's displayed buttons and hotkeys for its moves.
 
 | Game | Key | What it does |
 |---|---|---|
-| Menu | 1 to 4 | Blackjack, Video Poker, Hi-Lo, Solitaire |
+| Menu | 1 to 9, then 0 | Solitaire, FreeCell, Spider, Pyramid, Blackjack, Video Poker, Texas Hold'em, Baccarat, Hi-Lo, War |
 | Blackjack | n, h, s, x | Deal, Hit, Stand, Double |
 | Video Poker | n, 1 to 5, d | Deal, hold a card, Draw |
 | Hi-Lo | n, h, l | Deal, Higher, Lower |
 | Solitaire | d, w, 1 to 7, a, n | Draw, take the waste card, take or place on a column, Auto, New Deal |
-| Any game | m, k | Back to the menu, New Chips |
+| Betting games | k | New Chips, offered when the balance cannot cover a stake |
+| Any game | m | Back to the menu |
 
-Everyone starts with 100 chips. A bet is 5 chips. These are not real money.
+Everyone starts with 100 chips. The initial bet is 5 and can be changed at betting tables.
+Chips are pretend money.
 
 ## For developers
 
