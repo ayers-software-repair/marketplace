@@ -78,11 +78,11 @@ The same plugins are published in the Agent Plugins open format (`plugin.json` a
   "chat.plugins.marketplaces": ["ayers-software-repair/marketplace"]
   ```
 
-- **Cursor.** Cursor reads a plugin folder that has a root `plugin.json`. Use the supported-host requirements below when choosing a plugin.
+- **Cursor.** Cursor reads a plugin folder that has a root `plugin.json`. Use the host requirements below when choosing a plugin.
 
-Supported hosts:
+Host requirements:
 
-| Plugin | Runs in |
+| Plugin | Requirements |
 |---|---|
 | `tldr` | Claude Code only (hook modules) |
 | `letterstream-mail` | Claude Code (needs the Claude in Chrome extension) |
