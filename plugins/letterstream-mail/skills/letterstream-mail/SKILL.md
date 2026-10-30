@@ -1,46 +1,55 @@
 ---
 name: letterstream-mail
-description: Mails a paper letter through LetterStream (letterstream.com) in the user's Chrome, as Certified Mail with an electronic return receipt, so the user needs no printer, stamps or post office. Use when the user wants a letter sent by post, a dispute or cancellation letter mailed, or certified mail with proof of delivery. It drafts the letter, makes the PDF, fills the job, and stops for the user's approval of the letter and the total.
+description: Prepare a paper letter for Certified Mail with an electronic return receipt through LetterStream in the user's Chrome. Use when the user wants a letter sent by post, including a dispute or cancellation. Draft the letter, create its PDF, and prepare the job; the user approves the document and addresses, accepts advisories and proof acknowledgments, and completes payment.
 ---
 
 # Mail a letter with LetterStream
 
-LetterStream prints, stamps and posts the letter. Certified Mail includes tracking. No minimum, no monthly fee. A free account is required. The exact total shows when the job is set up; the site lists Certified Mail with an electronic return receipt from about $11.54, so quote the total from the page, never from memory.
+LetterStream prints and posts the letter. Certified Mail provides tracking, but delivery, signature and a return receipt are not guaranteed. A LetterStream account is required. Quote the exact total from the prepared job, never from memory or the historical prices below.
+
+## Before starting
+
+This workflow targets Claude Code with Claude in Chrome. Confirm that browser tools are connected before opening a mailing job; if unavailable, prepare the letter locally and explain the missing integration. Do not imply that a generated manifest makes another host supported. The [plugin README](../../README.md) covers installation and browser setup. Reuse the host's available PDF creation and inspection facilities; no mailing API or separate server is needed.
 
 ## Rules
 
 - The user creates the account, sets the password and adds payment. Never enter credentials or payment details.
-- The user approves the exact letter text before any upload.
+- The user approves the exact letter text before any upload. Show the generated PDF for review too; if its contents change, obtain approval again.
 - The user approves the final total and presses the final send or pay button. Never press it.
-- Use your own browser tab, one per task. Close it when the job is done. Never navigate a tab the user is working in.
+- The user accepts consequential advisories, terms and proof acknowledgments themselves. Never click "I Understand" or tick the required proof-review box for them.
+- Use your own browser tab, one per task. Never navigate a tab the user is working in. Close your tab after recording the result, unless the user still needs it for review or payment.
 - Verify every form value with the user before entering it: sender name, return address, recipient.
 - Put nothing in the letter the user did not approve. Do not add the user's address to the letter body unless asked; the return address goes in the sender fields of the job.
+- Keep letters, addresses, payment information and job/tracking records in the user's chosen private location, never in a public repository, fixture or demo.
 
 ## Steps
 
 1. Draft the letter in the user's voice. Show it in chat. Wait for approval.
-2. Make a PDF of the approved text. Keep it to one page where it fits. Check the text back out of the PDF before uploading.
-3. Open your own tab on https://www.letterstream.com/. If the site shows the log-in page, hand the tab to the user and wait.
-4. Start a new mailing job. Upload the PDF.
-5. Enter the recipient name and address exactly as given. Check them back against the source.
-6. Enter the sender (return address) with the values the user confirmed.
-7. Choose Certified Mail with the electronic return receipt.
-8. Read the page's total aloud to the user in chat: pages, mail type, postage, tax. Stop. Ask for approval.
-9. After approval, the user presses the final button. Then read the confirmation page and record the job number and the USPS tracking number.
-10. Add a line to the user's checklist: sent, date, tracking number, what the reply or receipt is awaited for.
-11. Close your tab.
+2. Make a US Letter PDF (8.5 by 11 inches) of the approved text. Keep it to one page where it fits without losing text. Extract and compare its text, render and inspect every page for clipping or missing content, then show the PDF to the user before upload.
+3. Confirm the exact recipient and sender names and address fields with the user, including optional address lines and ZIP codes. Do not guess missing values or silently accept a site's address correction.
+4. Open your own tab on https://www.letterstream.com/. Hand sign-up, login, CAPTCHA and payment setup to the user and wait.
+5. In My Jobs, choose "Send Letter(s)". Name the job, select "LetterStream Address Book" and "Add Certified Electronic Return Receipt"; verify Certified Mail is selected too. If the Certified Mail Advisory appears, let the user read and accept it before continuing.
+6. Select an existing recipient only after checking every address field against the confirmed values, or use "Add New Address" and enter them exactly. Save, select the recipient row and choose "Continue Job". Enter the confirmed return address on the next page.
+7. Choose "Add A Document", attach the approved PDF with the browser's file-upload facility, then choose "Upload and Add to Mailing". Confirm the correct document is attached once.
+8. Choose "Continue to Recipient Review" and open "View". Inspect all proof pages, including any cover sheet, recipient/address block and the complete letter. Let the user review the proof. Resolve mismatches before continuing; changed letter content needs renewed approval before another upload.
+9. Continue to Job Confirmation. Report the displayed total and available breakdown (document pages, mail type, printing, postage, fees and tax). Distinguish document pages from proof cover sheets. Ask for approval of the exact total. Leave the required proof-review acknowledgment unticked for the user to read and accept.
+10. The user completes acknowledgment and final payment/send themselves. After they finish, read the receipt and My Jobs status. Record the displayed job number and status; "paid and released into production" is not proof of USPS acceptance or delivery. If payment is unclear, stop and check the existing job with the user rather than create or pay for a duplicate.
+11. Record tracking only when the site actually displays it. If absent, mark it pending and tell the user it can be checked later through the job's "view" link; do not invent a number or promise an automatic follow-up. Record any later receipt only when observed.
+12. Update the user's checklist with the observed status and date, tracking or "pending", and what remains awaited. Close your tab when the user is finished with it.
+
+Use the observed labels as guidance, not a reason to click a different consequential control. If the live flow differs, inspect it and preserve the same approval boundaries; stop when the next action or outcome is uncertain.
 
 ## Record
 
-For each letter, keep: date, recipient, subject, total paid, job number, tracking number, and when the return receipt arrives.
+In the user's private record, keep: date, recipient, subject, observed job status, displayed total (paid only when confirmed), job number, tracking number or pending, and receipt status/date when observed. Do not mark a letter mailed or delivered from payment alone.
 
 ## Notes from use
 
-Verified in a real run, 27 Oct 2026:
+The repository records a real run on 27 Oct 2026. These historical observations inform the steps above; this maintenance pass did not repeat that mailing or verify the current live flow.
 
 - Account: the sign-up form is https://www.letterstream.com/ls/signup. The user fills username, password and phone and submits.
 - Start: My Jobs, "Send Letter(s)". Name the job, choose recipients from "LetterStream Address Book", tick "Add Certified Electronic Return Receipt" (it also ticks Certified Mail). The page shows the starting price: Certified Mail with the return receipt from $11.54 each.
-- Advisory popup: "Certified Mail Advisory" says tracking, signature and delivery are not guaranteed and there are no refunds for unsuccessful letters. Clicking "I Understand" accepts it, so ask the user first.
+- Advisory popup: "Certified Mail Advisory" says tracking, signature and delivery are not guaranteed and there are no refunds for unsuccessful letters. Clicking "I Understand" accepts it; the user must do this themselves.
 - Address book: "Add New Address", then fill Name 1, Address 1, Address 2, City, State, Zip. Save it with the button inside the popup (scroll the popup), then tick the row and press "Continue Job".
 - Return address: the next page asks for it. Ask the user for every value. Never guess a zip.
 - Document: "Add A Document", attach the PDF with the file-upload tool on the file input, then press "Upload and Add to Mailing". The PDF must be US Letter. A4 gives a warning. When you build the PDF with weasyprint, set `@page { size: letter; margin: 1in }`.
