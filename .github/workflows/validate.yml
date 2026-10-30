@@ -1,10 +1,16 @@
 name: validate
 on:
   push:
+    branches: [main]
   pull_request:
+permissions:
+  contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,9 +19,54 @@ jobs:
       - name: Agent Plugins manifests are current
         run: node scripts/agent-plugins.mjs --check
       - name: Get the Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
+        run: npm install -g @anthropic-ai/claude-code@2.1.312
       - name: Validate each plugin
         run: |
           for p in plugins/*/; do
             claude plugin validate --strict "$p"
           done
+      - name: Install TLDR into a fresh host configuration
+        env:
+          CLAUDE_CONFIG_DIR: ${{ runner.temp }}/tldr-host
+        run: |
+          test ! -e "$CLAUDE_CONFIG_DIR"
+          mkdir -p "$CLAUDE_CONFIG_DIR" tldr-evidence
+          test "$(claude --version)" = '2.1.312 (Claude Code)'
+          {
+            git rev-parse HEAD
+            claude --version
+            node --version
+            uname -sm
+            cat /etc/os-release
+            date -u +%FT%TZ
+          } | tee tldr-evidence/host.txt
+          git archive HEAD:plugins/tldr | sha256sum | tee tldr-evidence/bundle.sha256
+          claude plugin install tldr --marketplace "$GITHUB_WORKSPACE" --scope user --json | tee tldr-evidence/install.json
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFileSync, realpathSync, appendFileSync } from 'node:fs';
+          import { join, relative, isAbsolute, sep } from 'node:path';
+          const host = realpathSync(process.env.CLAUDE_CONFIG_DIR);
+          const { plugins } = JSON.parse(readFileSync(join(host, 'plugins/installed_plugins.json'), 'utf8'));
+          assert.deepEqual(Object.keys(plugins), ['tldr@ayerselectronics']);
+          const entries = plugins['tldr@ayerselectronics'];
+          assert(Array.isArray(entries) && entries.length === 1, 'expected exactly one TLDR install');
+          assert.equal(entries[0].scope, 'user');
+          const installed = realpathSync(entries[0].installPath);
+          const within = relative(host, installed);
+          assert(within && within !== '..' && !within.startsWith('..' + sep) && !isAbsolute(within), 'install escaped isolated host');
+          assert(!/[\r\n]/.test(installed), 'install path contains a newline');
+          appendFileSync(process.env.GITHUB_ENV, `TLDR_INSTALLED=${installed}\nCLAUDE_CONFIG_DIR=${host}\n`);
+          JS
+      - name: Validate and test the installed TLDR bundle
+        run: |
+          diff -r plugins/tldr "$TLDR_INSTALLED"
+          claude plugin validate "$TLDR_INSTALLED" --strict --profile directory --json | tee tldr-evidence/validation.json
+          claude plugin test "$TLDR_INSTALLED" 2>&1 | tee tldr-evidence/tests.log
+      - name: Retain TLDR host evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tldr-host-evidence
+          path: tldr-evidence/
+          if-no-files-found: ignore
