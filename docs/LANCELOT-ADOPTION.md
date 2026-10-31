@@ -31,7 +31,11 @@ are never uploaded or placed in PR text.
 
 Setup requires owner-controlled `RELEASE_APP_PRIVATE_KEY` for App `5549557`, installed on the
 existing Company and Marketplace repositories. The Company token is restricted to Company
-Contents/Actions read. `LANCELOT_SOURCE_READ_TOKEN` is a separate source-publication read
+Contents/Actions/Checks read; private producer check-run authentication requires Checks read.
+The private immutable Platform checkout uses the existing `PLATFORM_READ_KEY` mechanism with
+credential persistence disabled, separately from the Marketplace built-in token. Connecting
+that approved read key and granting installation Checks read remain owner setup.
+`LANCELOT_SOURCE_READ_TOKEN` is a separate source-publication read
 credential; access to Lancelot artifacts must be verified rather than assumed from a Company
 installation. The Marketplace writer token is separately restricted to Marketplace Contents
 and Pull requests write. Both App tokens use pinned action post-job revocation. That cleanup

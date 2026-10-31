@@ -52,6 +52,8 @@ test("workflow isolates private verification, credential-free package editing an
   assert.doesNotMatch(verify, /client_payload.*commit/);
   assert.match(verify, /repositories: ayers.repair/);
   assert.match(verify, /permission-actions: read/);
+  assert.match(verify, /permission-checks: read/);
+  assert.match(verify, /ssh-key: \$\{\{ secrets.PLATFORM_READ_KEY \}\}/);
   assert.match(
     verify,
     /SOURCE_READ_TOKEN: \$\{\{ secrets.LANCELOT_SOURCE_READ_TOKEN \}\}/,

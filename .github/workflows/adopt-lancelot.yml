@@ -33,18 +33,19 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: ayers-software-repair/platform
-          ref: ${{ needs.gate.outputs.platform-commit }}
-          path: _platform
-          persist-credentials: false
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
           package-manager-cache: false
       - name: Prepare the reviewed npm verifier before reading credentials
         run: npm install --global --ignore-scripts npm@11.16.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ayers-software-repair/platform
+          ref: ${{ needs.gate.outputs.platform-commit }}
+          ssh-key: ${{ secrets.PLATFORM_READ_KEY }}
+          path: _platform
+          persist-credentials: false
       - name: Create company-only read token
         id: company
         uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
@@ -54,6 +55,7 @@ jobs:
           owner: ayers-software-repair
           repositories: ayers.repair
           permission-actions: read
+          permission-checks: read
           permission-contents: read
           skip-token-revoke: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
