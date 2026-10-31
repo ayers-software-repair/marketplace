@@ -61,12 +61,18 @@ GitHub APIs; main is never mutated. App credentials are not passed to package pr
 
 ## Current integration status
 
-The Company development configuration baseline is `bd86568555e2050e7758b62da3571df1914866a4`.
-Root is still completing final production configuration/S3 roles and the released Platform
-worker pin. Those Platform/worker values are deliberately unset and fail closed; this is not a
-production cutover or an inactive-delivery claim. Root must supply reviewed final immutable pins,
-connect the required read/write credentials and authorize production integration. The shared
-verifier's local unreleased source is not a usable released pin.
+The Platform and both worker identities use released `v0.98.0`, immutable commit
+`5c21b96683f12c5b1c1753e3f4b3f7c9c090354c`. Its signed tag object is
+`bf5b5db81c6110dda10b5b9db71be89f04c7f1bf`. The released verifier retains the reviewed API:
+`verifyMcpAcceptance(fixedConsumerContext,{release,deployment},{worker,companyToken,sourceToken})`
+returns normalized release and the verified existing receipt.
+
+The final Company configuration commit remains deliberately null while Root completes and
+reviews production configuration/S3 roles. The historical development baseline
+`bd86568555e2050e7758b62da3571df1914866a4` is not a production pin. The gate therefore still
+fails closed before credentials. Root must supply the final immutable Company commit, connect
+the required read/write credentials and authorize production integration. This source pin update
+is not a production cutover or an inactive-delivery claim.
 
 Focused offline proof uses fake shared verification/API/npm transports and the real generator
 on temporary copies. It checks event authority, immutable settings, receipt privacy, token
