@@ -1,6 +1,6 @@
 {
   "name": "lancelot",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "Answers search and retrieval queries against a local LanceDB database, using OpenAI embeddings when an API key is set and text search otherwise.",
   "author": {
     "name": "Ayers Electronics"
