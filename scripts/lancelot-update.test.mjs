@@ -14,6 +14,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { lancelotFiles, prepareLancelotUpdate } from "./lancelot-update.mjs";
+import { prepareVerifiedPlan } from "./lancelot-consumer.mjs";
 
 const source = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const integrity = `sha512-${Buffer.alloc(64, 1).toString("base64")}`;
@@ -161,4 +162,55 @@ test("package failure or mismatched lock restores all owned files and hides diag
     for (const [path, bytes] of f.before)
       assert.deepEqual(readFileSync(join(f.root, path)), bytes);
   }
+});
+
+test("verified release summary becomes the exact six-file normal PR plan without private receipt data", (t) => {
+  const f = fixture(t);
+  const verified = {
+    schema: 1,
+    release,
+    deployment: {
+      repository: "ayers-software-repair/ayers.repair",
+      workflow: ".github/workflows/deploy-mcp.yml",
+      commit: "b".repeat(40),
+      runId: "456789",
+      runAttempt: 2,
+      phase: "accept",
+      artifactId: "789",
+      receiptDigest: `sha256:${"c".repeat(64)}`,
+    },
+    acceptance: {
+      releaseId: "d".repeat(64),
+      verificationCommit: "b".repeat(40),
+      workflow: ".github/workflows/deploy-mcp.yml",
+      runId: "456789",
+      runAttempt: 2,
+    },
+  };
+  const plan = prepareVerifiedPlan(
+    verified,
+    "e".repeat(40),
+    { runId: "999", runAttempt: 1 },
+    f,
+  );
+  assert.equal(plan.files.length, 6);
+  assert.deepEqual(plan.release, release);
+  assert.equal(
+    JSON.parse(
+      plan.files.find((file) => file.path === lancelotFiles[0]).content,
+    ).version,
+    release.version,
+  );
+  assert.deepEqual(plan.acceptance, verified.acceptance);
+  assert.throws(() =>
+    prepareVerifiedPlan(
+      {
+        ...verified,
+        acceptance: { ...verified.acceptance, privateImage: "never-public" },
+      },
+      "e".repeat(40),
+      { runId: "999", runAttempt: 1 },
+      f,
+    ),
+  );
 });

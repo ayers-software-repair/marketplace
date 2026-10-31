@@ -19,6 +19,8 @@ jobs:
           node-version: 22
       - name: Agent Plugins manifests are current
         run: node scripts/agent-plugins.mjs --check
+      - name: Lancelot deployment consumer boundaries
+        run: node --test scripts/lancelot-*.test.mjs
       - name: Get the Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code@2.1.312
       - name: Validate each plugin

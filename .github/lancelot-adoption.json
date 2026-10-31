@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "company": {
+    "repository": "ayers-software-repair/ayers.repair",
+    "commit": "bd86568555e2050e7758b62da3571df1914866a4",
+    "configPath": ".github/mcp-deployment.json",
+    "policyPath": "infra/mcp/adoption-policy.json"
+  },
+  "platform": {
+    "repository": "ayers-software-repair/platform",
+    "commit": null
+  },
+  "workers": {
+    "accept": null,
+    "recovery-accept": null
+  }
+}

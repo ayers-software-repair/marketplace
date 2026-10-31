@@ -1,0 +1,148 @@
+name: adopt deployed Lancelot
+on:
+  repository_dispatch:
+    types: [mcp-deployed]
+permissions:
+  contents: read
+concurrency:
+  group: lancelot-marketplace-adoption
+  cancel-in-progress: false
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      company-commit: ${{ steps.gate.outputs.company-commit }}
+      platform-commit: ${{ steps.gate.outputs.platform-commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - id: gate
+        run: node scripts/lancelot-consumer.mjs gate
+
+  verify:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      verified-json: ${{ steps.verify.outputs.verified-json }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ayers-software-repair/platform
+          ref: ${{ needs.gate.outputs.platform-commit }}
+          path: _platform
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Prepare the reviewed npm verifier before reading credentials
+        run: npm install --global --ignore-scripts npm@11.16.0
+      - name: Create company-only read token
+        id: company
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
+        with:
+          app-id: '5549557'
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ayers-software-repair
+          repositories: ayers.repair
+          permission-actions: read
+          permission-contents: read
+          skip-token-revoke: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ayers-software-repair/ayers.repair
+          ref: ${{ needs.gate.outputs.company-commit }}
+          token: ${{ steps.company.outputs.token }}
+          path: _company
+          persist-credentials: false
+      - name: Authenticate Company acceptance and original publication
+        id: verify
+        env:
+          COMPANY_READ_TOKEN: ${{ steps.company.outputs.token }}
+          SOURCE_READ_TOKEN: ${{ secrets.LANCELOT_SOURCE_READ_TOKEN }}
+        run: node scripts/lancelot-consumer.mjs verify
+
+  prepare:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      changed: ${{ steps.plan.outputs.changed }}
+      plan-digest: ${{ steps.plan.outputs.plan-digest }}
+      artifact-id: ${{ steps.artifact.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Prepare pinned plugin validation tools without credentials
+        run: npm install --global --ignore-scripts npm@11.16.0 @anthropic-ai/claude-code@2.1.312
+      - name: Prepare only canonical Lancelot inputs and generated files
+        id: plan
+        env:
+          VERIFIED_JSON: ${{ needs.verify.outputs.verified-json }}
+        run: node scripts/lancelot-consumer.mjs prepare
+      - name: Retain the exact normal PR plan
+        id: artifact
+        if: steps.plan.outputs.changed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: lancelot-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/lancelot-pr-plan.json
+          if-no-files-found: error
+          retention-days: 7
+
+  pr:
+    needs: prepare
+    if: needs.prepare.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ needs.prepare.outputs.artifact-id }}
+          path: ${{ runner.temp }}/lancelot-plan
+          merge-multiple: true
+      - name: Verify same-run plan digest before reading writer credentials
+        env:
+          PLAN_DIGEST: ${{ needs.prepare.outputs.plan-digest }}
+        run: node scripts/lancelot-consumer.mjs check-plan
+      - name: Create Marketplace-only PR token
+        id: writer
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
+        with:
+          app-id: '5549557'
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ayers-software-repair
+          repositories: marketplace
+          permission-contents: write
+          permission-pull-requests: write
+          skip-token-revoke: false
+      - name: Create or reuse one normal review PR
+        env:
+          GH_TOKEN: ${{ steps.writer.outputs.token }}
+          PLAN_DIGEST: ${{ needs.prepare.outputs.plan-digest }}
+        run: node scripts/lancelot-consumer.mjs pr
