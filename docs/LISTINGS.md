@@ -34,6 +34,25 @@ TLDR's vector source is `art/tldr-icon.svg`. Reproduce its raster with
 `rsvg-convert --width 512 --height 512 art/tldr-icon.svg --output plugins/tldr/.claude-plugin/icon.png`
 (librsvg 2.58.0; DejaVu Sans Mono installed). The icon uses the existing graphite/amber terminal palette.
 
+## TLDR installed-host evidence — 30 October 2026
+
+[PR 4](https://github.com/ayers-software-repair/marketplace/pull/4) delivered TLDR `0.1.1`
+at `be2cc5081fa1b4bdf92095936e0257543a08269d`;
+[PR 8](https://github.com/ayers-software-repair/marketplace/pull/8) aligned the installation and
+behavior documentation at `d42c63ab8ecb5ff25895dcfc8a2148dc495eef1a`.
+The [host compatibility receipt](../plugins/tldr/HOST-COMPATIBILITY.md#fresh-installed-host-suite--30-october-2026)
+records a fresh Claude Code `2.1.312` installation, installed-file comparison, strict validation
+and **110 passing offline tests across 17 files**, with the exact source, host, timestamp and
+[evidence artifact](https://github.com/ayers-software-repair/marketplace/actions/runs/41074499738/artifacts/12985933671).
+Post-merge validation also passed for
+[PR 4](https://github.com/ayers-software-repair/marketplace/actions/runs/41078710264) and
+[PR 8](https://github.com/ayers-software-repair/marketplace/actions/runs/41080820455).
+
+These checks exercise the real hook engine with stubbed model, clock and UI-host responses.
+Native UI painting, live-model output, a full live workflow and directory acceptance remain
+unverified. Executable hooks still require separate directory review; support for other agents
+remains deferred and is not established by generated manifests. No submission is recorded here.
+
 ## Directory queue
 
 No submission ID or independently verified public listing is recorded below. Do not mark these
