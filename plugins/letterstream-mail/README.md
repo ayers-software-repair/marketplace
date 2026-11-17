@@ -52,6 +52,17 @@ The skill retains notes from a real mailing on 27 October 2026. The current inst
 has not repeated that mailing. Manifest validation checks packaging; it does not prove a clean install,
 connected Chrome workflow, upload, payment or delivery. Fresh supported-host workflow proof remains outstanding.
 
+For package validation, install from the documented marketplace in a clean Claude Code
+configuration and confirm that the plugin is listed. Record the source commit, plugin version,
+OS, and Claude Code version.
+
+For the owner's final walkthrough, check that the installed skill is discoverable and record the
+Chrome extension version and connection status shown by `/chrome`. Use the synthetic sample below
+to inspect the local US Letter PDF and walk through the approval stops. Keep the sample addresses
+out of LetterStream. Stop before creating a mailing job, uploading a document, accepting an advisory,
+or reaching payment. Record what was observed and which steps were only discussed. Keep account
+details out of the evidence.
+
 The [synthetic replay proposal](DEMO.md) gives the website maintainer a sample letter and the review
 stops for a demonstration. It is an illustrative walkthrough of the recorded workflow, not a live mailing service or a new mailing test.
 
