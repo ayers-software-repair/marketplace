@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "company": {
+    "repository": "ayers-software-repair/ayers.repair",
+    "commit": null,
+    "configPath": ".github/mcp-deployment.json",
+    "policyPath": "infra/mcp/adoption-policy.json"
+  },
+  "platform": {
+    "repository": "ayers-software-repair/platform",
+    "commit": "5c21b96683f12c5b1c1753e3f4b3f7c9c090354c"
+  },
+  "workers": {
+    "accept": {
+      "repository": "ayers-software-repair/platform",
+      "workflowFilePath": ".github/workflows/deploy-mcp.yml",
+      "ref": "ayers-software-repair/platform/.github/workflows/deploy-mcp.yml@v0.98.0",
+      "sha": "5c21b96683f12c5b1c1753e3f4b3f7c9c090354c"
+    },
+    "recovery-accept": {
+      "repository": "ayers-software-repair/platform",
+      "workflowFilePath": ".github/workflows/recover-mcp.yml",
+      "ref": "ayers-software-repair/platform/.github/workflows/recover-mcp.yml@v0.98.0",
+      "sha": "5c21b96683f12c5b1c1753e3f4b3f7c9c090354c"
+    }
+  }
+}
