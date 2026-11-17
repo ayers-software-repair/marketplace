@@ -68,6 +68,21 @@ That first run's archive digest used variable timestamps. Its installed-file com
 test results are valid; use the normalized archive command below for reproducible bundle hashes.
 The follow-up workflow fixes that command; its exact-source results are in the PR checks.
 
+## Install and update recheck — 17 November 2026
+
+An isolated installation from Marketplace commit
+`f578116d98750242c51de4ef64264278987c6b95` on Ubuntu 24.04.5 LTS x86-64
+with Claude Code CLI `2.1.323` installed TLDR `0.1.1` and matched all 71
+source files. The documented shell update exited successfully and reported
+that `0.1.1` was already current.
+
+The listing showed a user-scope enabled installation, with project scope
+disabled and an untrusted project directory suppressed. This check covered
+installation and the already-current update path. The earlier offline suite
+was retained for the identical TLDR subtree. Runtime loading, live summary,
+and fullscreen mouse behavior remain for the owner's final pass. Directory
+validation was not rerun and executable-hook review remains open.
+
 ## Reproduce and review
 
 From a clean source checkout, use an empty absolute directory for `CLAUDE_CONFIG_DIR` and run:
